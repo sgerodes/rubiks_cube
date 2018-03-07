@@ -2,14 +2,13 @@ def  main():
     cube=Cube()
     #test(cube)
     print(cube)
-    turn="F"
+    turn="d"
     cube.rotate(turn)
     print(cube)
 
 
     #TODO
-    #slice turns M,M',E,E',S,S',
-    #rotate arrays when rotating a side
+    #slice turns M,M',E,E',S,S'
 
 
 class Cube:
@@ -55,7 +54,7 @@ class Cube:
         set=self.set_element
         get=self.get_element
 
-        self.set_side('F',self.rotate90(self.get_side('F')))
+        self.rotate90('F')
         u_line=self.get_side('U')[6:]
         set('U',6,get('L',8))
         set('U',7,get('L',5))
@@ -72,9 +71,11 @@ class Cube:
 
         self.unfront(turn[0])
 
-    def rotate90(self,arr):
+    def rotate90(self,side):
+        arr=self.get_side(side)
         original=[arr[:3] , arr[3:6] , arr[6:]]
-        return [item for sublist in zip(*original[::-1]) for item in sublist]
+        rotated=[item for sublist in zip(*original[::-1]) for item in sublist]
+        self.set_side(side,rotated)
 
     def front(self,turn):
         if not turn == 'F':
@@ -99,6 +100,15 @@ class Cube:
         get=self.get_side
         
         if turn == 'X':
+            #от себя
+            self.rotate90('R')
+            self.rotate90('U')
+            self.rotate90('U')
+            self.rotate90('L')
+            self.rotate90('L')
+            self.rotate90('L')
+            self.rotate90('B')
+            self.rotate90('B')
             f=get('F')
             set('F',get('D'))
             set('D',get('B'))
@@ -106,6 +116,11 @@ class Cube:
             set('U',f)
 
         if turn == 'Y':
+            #налево
+            self.rotate90('U')
+            self.rotate90('D')
+            self.rotate90('D')
+            self.rotate90('D')
             f=get('F')
             set('F',get('R'))
             set('R',get('B'))
@@ -113,6 +128,14 @@ class Cube:
             set('L',f)
 
         if turn == 'Z':
+            #по часовой
+            self.rotate90('L')
+            self.rotate90('U')
+            self.rotate90('R')
+            self.rotate90('D')
+            self.rotate90('B')
+            self.rotate90('B')
+            self.rotate90('B')
             u=get('U')
             set('U',get('L'))
             set('L',get('D'))
@@ -152,6 +175,7 @@ class Cube:
 
 def test(cube):
     cube.set_element('F',0,'V')
+    cube.set_element('B',0,'M')
     cube.set_element('U',6,'0')
     cube.set_element('U',7,'1')
     cube.set_element('U',8,'2')
