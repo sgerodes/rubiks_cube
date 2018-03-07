@@ -1,10 +1,3 @@
-def  main():
-    scramble1="U2  R  D'  L  B  L'  U  D  R  F'  R  F2  U'  R  F'  D2  F  B  D  U  L2  D2  R2  F  L'"
-    #cube=Cube(scramble1)
-    cube=Rubiks_Cube();print(cube)
-    #test(cube)
-    turn="R";cube.rotate(turn);print(cube)
-
 class Rubiks_Cube:
     solved_cube=[['b']*9,['r']*9,['g']*9,['o']*9,['y']*9,['w']*9]
     orientation={'L':0,'F':1,'R':2,'B':3,'U':4,'D':5}
@@ -163,35 +156,14 @@ class Rubiks_Cube:
     def __repr__(self):
         indent=' '*6
         arr=self.get_side('U')
-        up=indent+' '.join(arr[:3])+'\n' + indent+' '.join(arr[3:6])+'\n' + indent+' '.join(arr[6:])+'\n'
+        up=indent+'+-----+' + '\n' +indent+'|'+' '.join(arr[:3])+'|\n' + indent+'|'+' '.join(arr[3:6])+'|\n' + indent+'|'+' '.join(arr[6:])+'|\n'
         arr=self.get_side('D')
-        down=indent+' '.join(arr[:3])+'\n' + indent+' '.join(arr[3:6])+'\n' + indent+' '.join(arr[6:])+'\n'
+        down=indent+'|'+' '.join(arr[:3])+'|\n' + indent+'|'+' '.join(arr[3:6])+'|\n' + indent+'|'+' '.join(arr[6:])+'|\n' + indent+'+-----+' + '\n' 
         
         middle=[self.get_side(x) for x in ['L','F','R','B']]
-        upper_middle=''.join([' '.join(side[:3]) + ' ' for side in middle])
-        middle_middle=''.join([' '.join(side[3:6]) + ' ' for side in middle])
-        lower_middle=''.join([' '.join(side[6:]) + ' ' for side in middle])
+        upper_middle='|'+''.join([' '.join(side[:3]) + '|' for side in middle])
+        middle_middle='|'+''.join([' '.join(side[3:6]) + '|' for side in middle])
+        lower_middle='|'+''.join([' '.join(side[6:]) + '|' for side in middle])
         
-        output=up + upper_middle+'\n' + middle_middle+'\n' + lower_middle+'\n' + down
+        output=up + '+-----'*4+'+\n' + upper_middle+'\n' + middle_middle+'\n' + lower_middle+'\n' + '+-----'*4+'+\n'+ down
         return output
-
-def test(cube):
-    cube.set_element('F',0,'V')
-    cube.set_element('B',0,'M')
-    cube.set_element('U',6,'0')
-    cube.set_element('U',7,'1')
-    cube.set_element('U',8,'2')
-    cube.set_element('R',0,'3')
-    cube.set_element('R',3,'4')
-    cube.set_element('R',6,'5')
-    cube.set_element('D',0,'8')
-    cube.set_element('D',1,'7')
-    cube.set_element('D',2,'6')
-    cube.set_element('L',8,'9')
-    cube.set_element('L',5,'X')
-    cube.set_element('L',2,'I')
-
-main()
-
-
-
