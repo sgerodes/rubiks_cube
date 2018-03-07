@@ -5,7 +5,7 @@ def  main():
     turn="F"
     cube.rotate(turn)
     print(cube)
-    #TODO slice turns, rotate arrays when rotating a side
+    #TODO slice turns M,M',E,E',S,S', rotate arrays when rotating a side
 
 
 class Cube:
@@ -25,9 +25,6 @@ class Cube:
             self.state=self.solved_cube
 
 
-    #cases M,M',E,E',S,S'
-    #cases f,r,l,u,d,b
-    #cases f',r',l',u',d',b'
     def rotate(self,turn):
         if turn[0] in self.possible_orientation:
             self.orient(turn)
@@ -53,11 +50,7 @@ class Cube:
         state=self.state
         set=self.set_element
         get=self.get_element
-        
-        #side=self.get_side('F')
-        #original=[side[:3] , side[3:6] , side[6:]]
-        #rotated = [item for sublist in zip(*original[::-1]) for item in sublist]
-        #self.set_side('F',rotated)
+
         self.set_side('F',self.rotate90(self.get_side('F')))
         u_line=self.get_side('U')[6:]
         set('U',6,get('L',8))
