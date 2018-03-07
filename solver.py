@@ -5,7 +5,10 @@ def  main():
     turn="F"
     cube.rotate(turn)
     print(cube)
-    #TODO slice turns M,M',E,E',S,S', rotate arrays when rotating a side
+
+    #TODO
+    #slice turns M,M',E,E',S,S',
+    #rotate arrays when rotating a side
 
 
 class Cube:
