@@ -2,13 +2,13 @@ def  main():
     cube=Cube()
     #test(cube)
     print(cube)
-    turn="d"
+    turn="S'"
     cube.rotate(turn)
     print(cube)
 
 
     #TODO
-    #slice turns M,M',E,E',S,S'
+    #initialise with a scramble
 
 
 class Cube:
@@ -18,8 +18,10 @@ class Cube:
     unfront_table={'D':"X'",'R':"Y'",'U':"X",'L':"Y",'B':'X2'}
     double_turns={'f':'B Z', 'r':'L X', 'u':'D Y', 'l':"R X'", 'd':"U Y'", 'b':"F Z'"}
     double_turns.update({"f'":"B' Z'", "r'":"L' X'", "u'":"D' Y'", "l'":"R' X", "d'":"U' Y", "b'":"F' Z"})
+    slice_turns={"M":"R' L X", "M'":"R L' X'", "E":"U D' Y'", "E'":"U' D Y", "S":"F B' Z'", "S'":"F' B Z"}
     possible_orientation='XYZ'
     possible_double_turns='fruldb'
+    possible_slice_turns='MES'
     
     def __init__(self,*scramble):
         if scramble:
@@ -32,11 +34,13 @@ class Cube:
         if turn[0] in self.possible_orientation:
             self.orient(turn)
             return
+        if turn[0] in self.possible_slice_turns:
+            for subturn in self.slice_turns[turn].split(' '):
+                self.rotate(subturn)
+            return
         if turn in self.possible_double_turns:
             for subturn in self.double_turns[turn].split(' '):
-                print(subturn)
                 self.rotate(subturn)
-                print(self)
             return
         if '2' in turn:
             self.rotate(turn[0])
