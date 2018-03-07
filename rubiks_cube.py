@@ -1,11 +1,11 @@
 def  main():
     scramble1="U2  R  D'  L  B  L'  U  D  R  F'  R  F2  U'  R  F'  D2  F  B  D  U  L2  D2  R2  F  L'"
     #cube=Cube(scramble1)
-    cube=Cube();print(cube)
+    cube=Rubiks_Cube();print(cube)
     #test(cube)
     turn="R";cube.rotate(turn);print(cube)
 
-class Cube:
+class Rubiks_Cube:
     solved_cube=[['b']*9,['r']*9,['g']*9,['o']*9,['y']*9,['w']*9]
     orientation={'L':0,'F':1,'R':2,'B':3,'U':4,'D':5}
     front_table={'D':'X','R':'Y','U':"X'",'L':"Y'",'B':'X2'}
