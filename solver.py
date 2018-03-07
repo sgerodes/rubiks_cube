@@ -1,10 +1,11 @@
 def  main():
     cube=Cube()
+    #test(cube)
     print(cube)
-    turn="X"
+    turn="F"
     cube.rotate(turn)
     print(cube)
-    #TODO double turns, slice turns
+    #TODO slice turns, rotate arrays when rotating a side
 
 
 class Cube:
@@ -31,6 +32,12 @@ class Cube:
         if turn[0] in self.possible_orientation:
             self.orient(turn)
             return
+        if turn in self.possible_double_turns:
+            for subturn in self.double_turns[turn].split(' '):
+                print(subturn)
+                self.rotate(subturn)
+                print(self)
+            return
         if '2' in turn:
             self.rotate(turn[0])
             self.rotate(turn[0])
@@ -47,10 +54,11 @@ class Cube:
         set=self.set_element
         get=self.get_element
         
-        side=self.get_side('F')
-        original=[side[:3] , side[3:6] , side[6:]]
-        rotated = [item for sublist in zip(*original[::-1]) for item in sublist]
-        self.set_side('F',rotated)
+        #side=self.get_side('F')
+        #original=[side[:3] , side[3:6] , side[6:]]
+        #rotated = [item for sublist in zip(*original[::-1]) for item in sublist]
+        #self.set_side('F',rotated)
+        self.set_side('F',self.rotate90(self.get_side('F')))
         u_line=self.get_side('U')[6:]
         set('U',6,get('L',8))
         set('U',7,get('L',5))
@@ -66,6 +74,10 @@ class Cube:
         set('R',0,u_line[0])
 
         self.unfront(turn[0])
+
+    def rotate90(self,arr):
+        original=[arr[:3] , arr[3:6] , arr[6:]]
+        return [item for sublist in zip(*original[::-1]) for item in sublist]
 
     def front(self,turn):
         if not turn == 'F':
@@ -141,7 +153,7 @@ class Cube:
         output=up + upper_middle+'\n' + middle_middle+'\n' + lower_middle+'\n' + down
         return output
 
-def test():
+def test(cube):
     cube.set_element('F',0,'V')
     cube.set_element('U',6,'0')
     cube.set_element('U',7,'1')
