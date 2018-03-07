@@ -6,6 +6,7 @@ def  main():
     cube.rotate(turn)
     print(cube)
 
+
     #TODO
     #slice turns M,M',E,E',S,S',
     #rotate arrays when rotating a side
