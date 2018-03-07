@@ -1,15 +1,9 @@
 def  main():
-    cube=Cube()
+    scramble1="U2  R  D'  L  B  L'  U  D  R  F'  R  F2  U'  R  F'  D2  F  B  D  U  L2  D2  R2  F  L'"
+    #cube=Cube(scramble1)
+    cube=Cube();print(cube)
     #test(cube)
-    print(cube)
-    turn="S'"
-    cube.rotate(turn)
-    print(cube)
-
-
-    #TODO
-    #initialise with a scramble
-
+    turn="R";cube.rotate(turn);print(cube)
 
 class Cube:
     solved_cube=[['b']*9,['r']*9,['g']*9,['o']*9,['y']*9,['w']*9]
@@ -24,12 +18,16 @@ class Cube:
     possible_slice_turns='MES'
     
     def __init__(self,*scramble):
+        self.state=self.solved_cube
         if scramble:
-            pass
-        else:
-            self.state=self.solved_cube
+            self.scramble_cube(scramble[0])
+    
 
-
+    def scramble_cube(self,s):
+        for turn in s.split():
+            self.rotate(turn)
+    
+    
     def rotate(self,turn):
         if turn[0] in self.possible_orientation:
             self.orient(turn)
