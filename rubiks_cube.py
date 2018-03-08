@@ -1,6 +1,7 @@
 class Rubiks_Cube:
-    solved_cube=[['b']*9,['r']*9,['g']*9,['o']*9,['y']*9,['w']*9]
-    orientation={'L':0,'F':1,'R':2,'B':3,'U':4,'D':5}
+    solved_cube=[['y']*9,['b']*9,['r']*9,['g']*9,['o']*9,['w']*9]
+    orientation={'U':0,'L':1,'F':2,'R':3,'B':4,'D':5}
+
     front_table={'D':'X','R':'Y','U':"X'",'L':"Y'",'B':'X2'}
     unfront_table={'D':"X'",'R':"Y'",'U':"X",'L':"Y",'B':'X2'}
     double_turns={'f':'B Z', 'r':'L X', 'u':'D Y', 'l':"R X'", 'd':"U Y'", 'b':"F Z'"}
@@ -19,6 +20,9 @@ class Rubiks_Cube:
     def scramble_cube(self,s):
         for turn in s.split():
             self.rotate(turn)
+
+    def get_state(self):
+        return ''.join([''.join(face) for face in self.state])
     
     
     def rotate(self,turn):

@@ -16,11 +16,14 @@ def test(cube):
     cube.set_element('L',5,'X')
     cube.set_element('L',2,'I')
     
-scramble1="U2  R  D'  L  B  L'  U  D  R  F'  R  F2  U'  R  F'  D2  F  B  D  U  L2  D2  R2  F  L'"
-#cube=Cube(scramble1)
+scramble1="F' B2 L' R' B2 R' U2 L' R' B R2 D' B L2 D' F' R2 F2"
+#cube=Rubiks_Cube(scramble1);print(cube)
 cube=Rubiks_Cube();print(cube)
+cube.scramble_cube("Z2 Y'");print(cube)#orient like in sctimer.net
+cube.scramble_cube(scramble1);print(cube)
 #test(cube)
-turn="R";cube.rotate(turn);print(cube)
+#turn="R";cube.rotate(turn);print(cube)
+print(cube.get_state())
 
 
 
